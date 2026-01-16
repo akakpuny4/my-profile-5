@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="id" class="bg-[#050505]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alif Tan Malaka - Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts: Manrope (Clean & Modern) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Lenis (Smooth Scroll Library) -->
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#050505',
+                        light: '#ffffff',
+                        gray: '#a3a3a3',
+                        border: 'rgba(255, 255, 255, 0.1)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Lenis Recommended CSS */
+        html.lenis, html.lenis body {
+            height: auto;
+        }
+        .lenis.lenis-smooth {
+            scroll-behavior: auto !important;
+        }
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        
+        /* Custom Scrollbar Hiding */
+        .hide-scroll::-webkit-scrollbar {
+            height: 0px;
+            background: transparent;
+        }
+        .project-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            scroll-behavior: smooth; /* Native smooth scroll aktif kembali */
+        }
+        .project-scroll::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+</head>
+<body class="text-white antialiased selection:bg-white selection:text-black">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 w-full z-50 mix-blend-difference px-6 py-6 flex justify-between items-center">
+        <a href="#" class="text-2xl font-bold tracking-tighter uppercase">Alif.TM</a>
+        <!-- Tombol Download CV dihapus dari sini -->
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="min-h-screen flex flex-col justify-center px-6 pt-20 border-b border-border">
+        <div class="max-w-[1400px] mx-auto w-full">
+            <h1 class="text-[15vw] leading-[0.8] font-bold tracking-tighter uppercase">
+                Alif Tan<br>
+                <span class="text-[#666666]">Malaka</span>
+            </h1>
+            <div class="mt-12 md:mt-24 grid md:grid-cols-2 gap-8 items-end">
+                <p class="text-lg md:text-xl font-medium max-w-md text-gray-300">
+                    Menerjemahkan kebutuhan kompleks menjadi solusi teknis yang fungsional dan efisien.
+                </p>
+                <div class="flex justify-start md:justify-end gap-12 text-sm text-gray-500 uppercase tracking-widest">
+                    <span>Malang, ID</span>
+                    <span>Available for work</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT WRAPPER -->
+    <div class="max-w-[1400px] mx-auto w-full">
+
+        <!-- ABOUT SECTION -->
+        <section class="py-24 px-6 border-b border-border">
+            <div class="grid md:grid-cols-12 gap-8">
+                <!-- Sticky Title -->
+                <div class="md:col-span-4 relative">
+                    <div class="md:sticky md:top-12">
+                        <h2 class="text-4xl md:text-5xl font-bold uppercase tracking-tight mb-2">About Me</h2>
+                        <span class="text-xs text-gray-500 uppercase tracking-widest block mb-8 md:mb-0">01 — Profile</span>
+                    </div>
+                </div>
+                <!-- Content -->
+                <div class="md:col-span-8 space-y-12">
+                    <div class="text-2xl md:text-4xl font-light leading-tight">
+                        Lulusan Sarjana Komputer (Teknik Informatika) dari Universitas Muhammadiyah Malang dengan IPK 3,56/4,00.
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-12">
+                        <div>
+                            <h3 class="text-sm text-gray-500 uppercase tracking-widest mb-4">Core Competencies</h3>
+                            <ul class="space-y-2 text-xl font-medium">
+                                <li class="border-l-2 border-white pl-4">System Analysis</li>
+                                <li class="border-l-2 border-white pl-4">Full-stack Web Development</li>
+                                <li class="border-l-2 border-white pl-4">UI/UX Design</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="text-sm text-gray-500 uppercase tracking-widest mb-4">Key Achievement</h3>
+                            <p class="text-lg text-gray-300">
+                                Memiliki pengalaman mengimplementasikan sistem digitalisasi di instansi pemerintah yang meningkatkan efisiensi hingga 50%.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6 border border-border bg-white/5">
+                        <p class="text-lg">Terampil menggunakan <span class="text-white font-bold">Laravel</span>, serta metode UX seperti <span class="text-white font-bold">System Usability Scale (SUS)</span> dan <span class="text-white font-bold">Think Aloud</span>.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXPERIENCE SECTION -->
+        <section class="py-24 px-6 border-b border-border">
+            <div class="grid md:grid-cols-12 gap-8">
+                <div class="md:col-span-4 relative">
+                    <div class="md:sticky md:top-12">
+                        <h2 class="text-4xl md:text-5xl font-bold uppercase tracking-tight mb-2">Experience</h2>
+                        <span class="text-xs text-gray-500 uppercase tracking-widest block mb-8 md:mb-0">02 — Career</span>
+                    </div>
+                </div>
+                <div class="md:col-span-8">
+                    <!-- Job Item -->
+                    <div class="group">
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-4">
+                            <h3 class="text-3xl font-bold">System Analyst Intern</h3>
+                            <span class="text-gray-500 font-mono mt-1 md:mt-0">Juni 2023 – Sept 2023</span>
+                        </div>
+                        <div class="text-xl text-gray-400 mb-6">Balaikota Batu – Bagian Umum</div>
+                        
+                        <ul class="space-y-4 text-lg text-gray-300 border-l border-border pl-6">
+                            <li>Analisis kebutuhan pengguna untuk Sistem Informasi Peminjaman Tempat.</li>
+                            <li>Merancang 10+ user flow & logika bisnis sistem.</li>
+                            <li>Melakukan usability testing (SUS) dengan skor 78 (Good).</li>
+                            <li>Kolaborasi dengan tim back-end untuk implementasi fitur prioritas.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EDUCATION & ORG SECTION -->
+        <section class="py-24 px-6 border-b border-border">
+            <div class="grid md:grid-cols-12 gap-8">
+                <div class="md:col-span-4 relative">
+                    <div class="md:sticky md:top-12">
+                        <h2 class="text-4xl md:text-5xl font-bold uppercase tracking-tight mb-2">Education</h2>
+                        <span class="text-xs text-gray-500 uppercase tracking-widest block mb-8 md:mb-0">03 — Background</span>
+                    </div>
+                </div>
+                <div class="md:col-span-8 space-y-16">
+                    
+                    <!-- Education -->
+                    <div>
+                        <div class="flex flex-col md:flex-row md:justify-between md:items-baseline mb-2">
+                            <h3 class="text-2xl font-bold">Universitas Muhammadiyah Malang</h3>
+                            <span class="text-gray-500 font-mono">2020 – 2025</span>
+                        </div>
+                        <div class="text-lg text-gray-400 mb-6">Sarjana Komputer – Teknik Informatika (IPK 3.56/4.00)</div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="bg-white/5 p-4 border border-border">
+                                <span class="text-xs text-gray-500 uppercase tracking-widest block mb-2">Tugas Akhir</span>
+                                <p>Evaluasi usability Website Repository menggunakan SUS & Think Aloud</p>
+                            </div>
+                            <div class="bg-white/5 p-4 border border-border">
+                                <span class="text-xs text-gray-500 uppercase tracking-widest block mb-2">Fokus Studi</span>
+                                <p>Rekayasa Perangkat Lunak</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Organization -->
+                    <div>
+                        <h3 class="text-sm text-gray-500 uppercase tracking-widest mb-6 border-b border-border pb-2">Organizational Experience</h3>
+                        <div class="space-y-6">
+                            <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold">BEM Fakultas Teknik UMM</span>
+                                <span class="text-right text-gray-500">Ketua Bidang (2023–2024)</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold">Himpunan Mahasiswa Islam (HMI)</span>
+                                <span class="text-right text-gray-500">Anggota Aktif (2023–2024)</span>
+                            </div>
+                             <div class="flex justify-between items-center">
+                                <span class="text-xl font-bold">Komunitas Diving Tidore</span>
+                                <span class="text-right text-gray-500">Relawan (2020)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section class="py-24 px-6 border-b border-border">
+             <div class="grid md:grid-cols-12 gap-8">
+                <div class="md:col-span-4 relative">
+                    <div class="md:sticky md:top-12">
+                        <h2 class="text-4xl md:text-5xl font-bold uppercase tracking-tight mb-2">Skills</h2>
+                        <span class="text-xs text-gray-500 uppercase tracking-widest block mb-8 md:mb-0">04 — Expertise</span>
+                    </div>
+                </div>
+                <div class="md:col-span-8">
+                    <div class="grid grid-cols-2 md:grid-cols-2 gap-x-8 gap-y-12">
+                        
+                        <div>
+                            <h4 class="text-xl font-bold mb-4 text-white">Research & UX</h4>
+                            <ul class="space-y-2 text-gray-400">
+                                <li>User Research</li>
+                                <li>UX Journey Mapping</li>
+                                <li>SUS</li>
+                                <li>Retrospective Think Aloud</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xl font-bold mb-4 text-white">Development</h4>
+                            <ul class="space-y-2 text-gray-400">
+                                <li>HTML, CSS, JavaScript</li>
+                                <li>Laravel (API)</li>
+                                <li>MySQL</li>
+                                <li>Git / GitHub / JSON</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xl font-bold mb-4 text-white">Design Tools</h4>
+                            <ul class="space-y-2 text-gray-400">
+                                <li>Figma</li>
+                                <li>Canva</li>
+                                <li>Wireframing & Prototyping</li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h4 class="text-xl font-bold mb-4 text-white">Multimedia & Languages</h4>
+                            <ul class="space-y-2 text-gray-400">
+                                <li>Video Editing & Videography</li>
+                                <li>Photography</li>
+                                <li class="mt-4 pt-2 border-t border-border text-white">Bahasa Indonesia (Native)</li>
+                                <li class="text-white">English (Intermediate)</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION (HORIZONTAL SCROLL) -->
+        <!-- data-lenis-prevent memastikan scroll di dalam area ini tidak diganggu oleh Lenis -->
+        <section class="py-24 border-b border-border overflow-hidden" data-lenis-prevent>
+             <div class="px-6 mb-12 flex justify-between items-end">
+                <div>
+                    <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tight">All Projects</h2>
+                    <span class="text-xs text-gray-500 uppercase tracking-widest block mt-2">05 — Portfolio</span>
+                </div>
+                <div class="hidden md:block text-sm text-gray-500">
+                    Scroll Horizontal &rarr;
+                </div>
+            </div>
+
+            <!-- Scroll Container -->
+            <!-- wheel event listener dihapus, menggunakan scroll native -->
+            <div class="project-scroll flex overflow-x-auto space-x-6 px-6 pb-8 snap-x w-full outline-none" tabindex="0">
+                
+                <!-- Project 1: Peminjaman -->
+                <a href="https://github.com/akakpuny4/peminjaman-_tempat_Balaikota_Batu" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/IMG_5045.JPEG" alt="Peminjaman" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Peminjaman Tempat</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Balaikota Batu</p>
+                            <p class="text-base font-medium opacity-80">Sistem reservasi instansi pemerintah.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>GitHub</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 2: Repository -->
+                <a href="https://eprints.umm.ac.id/id/eprint/17258/" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/sus.png" alt="Repository" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Analisis Usability</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">UMM Repository</p>
+                            <p class="text-base font-medium opacity-80">Penelitian SUS & Think Aloud.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>Journal</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                 <!-- Project 3: Kesehatan Mental -->
+                 <a href="https://www.figma.com/design/eDYCV7WGx0QM2jIkaKPCfJ" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/calm.png" alt="Mental Health" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Aplikasi Kesehatan Mental</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">UX Design</p>
+                            <p class="text-base font-medium opacity-80">Pendekatan UX Journey Mapping.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>Figma</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 4: Workout -->
+                <a href="https://www.figma.com/design/tic3DJveZcQmkQ6JMJsgCm" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/workout.png" alt="Workout" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Aplikasi Workout</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">UX Design</p>
+                            <p class="text-base font-medium opacity-80">Desain aplikasi kebugaran.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>Figma</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 5: Kencan -->
+                <a href="https://www.figma.com/design/WgRjvDSD9OXc5O1PFevTg0" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/datingapp.png" alt="Dating" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Aplikasi Kencan</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">UX Design</p>
+                            <p class="text-base font-medium opacity-80">Berbasis UX Journey.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>Figma</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                 <!-- Project 6: Dikichi -->
+                <a href="https://akakpuny4.github.io/Dikichi/" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/dikichi.png" alt="Dikichi" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Official Dikichi.id</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Web Design</p>
+                            <p class="text-base font-medium opacity-80">Linktree premium & interaktif.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>Live Site</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 7: Wedding -->
+                <a href="https://akakpuny4.github.io/Undangan_pernikahan/" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/undangan.png" alt="Wedding" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Wedding Invitation</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Frontend</p>
+                            <p class="text-base font-medium opacity-80">Undangan digital interaktif.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>Live Site</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 8: Gemini 1 -->
+                <a href="https://github.com/akakpuny4/Gemini_1" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/gemini1.png" alt="Gemini 1" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Gemini Challenge 1</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Interactive</p>
+                            <p class="text-base font-medium opacity-80">Portofolio Google Challenge.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>GitHub</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 9: Gemini 2 -->
+                <a href="https://akakpuny4.github.io/Gemini_2/" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/gemini2.png" alt="Gemini 2" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Gemini Challenge 2</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Interactive</p>
+                            <p class="text-base font-medium opacity-80">Lanjutan Google Challenge.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>Live Site</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 10: Stock API -->
+                <a href="https://github.com/akakpuny4/Stock-api" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://placehold.co/600x400/171717/white?text=Stock+API" alt="API" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Stock Management API</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Laravel 11</p>
+                            <p class="text-base font-medium opacity-80">RESTful API inventaris.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>GitHub</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                 <!-- Project 11: Karya Laili -->
+                 <a href="https://akakpuny4.github.io/Lailia_project/" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/Lailia.png" alt="Laili" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">PT. Karya Laili</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Company Profile</p>
+                            <p class="text-base font-medium opacity-80">Web profil & katalog produk.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>Live Site</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                 <!-- Project 12: GeoTani -->
+                 <a href="https://akakpuny4.github.io/Geo_tani/" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/geotani.png" alt="GeoTani" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">GeoTani</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Dashboard</p>
+                            <p class="text-base font-medium opacity-80">Monitoring pertanian digital.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>Live Site</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 13: Phishing -->
+                <a href="https://github.com/akakpuny4/My_education_project_not_phising" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/phising.png" alt="Phishing" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Edukasi Phishing</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Education</p>
+                            <p class="text-base font-medium opacity-80">Repository edukasi cyber.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>GitHub</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 14: Ichigo -->
+                <a href="https://github.com/akakpuny4/Ichigo" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/ichigo.png" alt="Ichigo" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Ichigo 4fun</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Pure CSS</p>
+                            <p class="text-base font-medium opacity-80">Logo Kamen Rider HTML/CSS.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>GitHub</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 15: Python CLI -->
+                <div class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="https://placehold.co/600x400/171717/white?text=Python+CLI" alt="CLI" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Perpustakaan CLI</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Python</p>
+                            <p class="text-base font-medium opacity-80">Aplikasi perpus berbasis command line.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>CLI App</span>
+                            <i data-lucide="terminal" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 16: ZRO -->
+                <a href="https://github.com/akakpuny4/my-profile-0" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/p1.png" alt="ZRO" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Justme4fun ZRO</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Legacy</p>
+                            <p class="text-base font-medium opacity-80">Portofolio awal (Template 1).</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>GitHub</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 17: FRT -->
+                <a href="https://github.com/akakpuny4/my-profile-2" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/p2.png" alt="FRT" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Justme4fun FRT</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Legacy</p>
+                            <p class="text-base font-medium opacity-80">Portofolio masa kuliah.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>GitHub</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 18: SCD -->
+                <a href="https://github.com/akakpuny4/my-profile-3" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/p3.png" alt="SCD" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Justme4fun SCD</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Legacy</p>
+                            <p class="text-base font-medium opacity-80">Portofolio lama versi 2.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>GitHub</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Project 19: THRD -->
+                <a href="https://github.com/akakpuny4/my-profile-4" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
+                    <div class="h-48 overflow-hidden">
+                        <img src="exp/p4.png" alt="THRD" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
+                    </div>
+                    <div class="p-8 flex flex-col flex-grow justify-between">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Justme4fun THRD</h3>
+                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Legacy</p>
+                            <p class="text-base font-medium opacity-80">Portofolio lama versi 3.</p>
+                        </div>
+                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
+                            <span>GitHub</span>
+                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </section>
+
+        <!-- FOOTER / CONTACT -->
+        <footer class="py-24 px-6">
+            <h2 class="text-[10vw] font-bold leading-none uppercase tracking-tighter mb-4 text-center md:text-left">
+                Get in Touch
+            </h2>
+
+            <!-- BAGIAN BARU: Tombol Download CV dipindahkan ke sini -->
+            <div class="mb-12 text-center md:text-left">
+                 <a href="#" onclick="alert('File CV belum diupload. Silakan ganti href pada kode HTML dengan link PDF CV Anda.')" class="inline-flex items-center gap-2 px-8 py-3 bg-white text-black rounded-full text-sm font-bold uppercase tracking-widest hover:bg-gray-200 transition-all duration-300">
+                    <span>Download CV</span>
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 text-lg">
+                <div>
+                    <p class="text-gray-500 uppercase tracking-widest mb-4">Socials</p>
+                    <div class="flex flex-col space-y-2">
+                        <a href="https://instagram.com/aliftanmalaka" target="_blank" class="hover:text-white text-gray-400">Instagram: @aliftanmalaka</a>
+                        <a href="#" class="hover:text-white text-gray-400">Facebook: aliftanmalaka</a>
+                        <a href="https://www.linkedin.com/in/alif-tan-malaka-130665388/" target="_blank" class="hover:text-white text-gray-400">LinkedIn: Alif Tan Malaka</a>
+                        <a href="https://github.com/akakpuny4" target="_blank" class="hover:text-white text-gray-400">GitHub: akakpuny4</a>
+                    </div>
+                </div>
+                <div class="flex items-end justify-start md:justify-end">
+                    <p class="text-gray-600 text-sm">© 2025 Alif Tan Malaka.</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Init Scripts -->
+    <script>
+        lucide.createIcons();
+
+        // 1. Initialize Lenis (Smooth Scroll)
+        const lenis = new Lenis();
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+        requestAnimationFrame(raf);
+
+        // MOUSE WHEEL CONTROL REMOVED
+        // The previous script to control horizontal scroll with wheel is deleted.
+        // Users can now scroll normally with shift+scroll or touch swipe.
+    </script>
+</body>
+</html>
