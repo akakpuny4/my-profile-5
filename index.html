@@ -59,10 +59,16 @@
         .project-scroll {
             -ms-overflow-style: none;
             scrollbar-width: none;
-            scroll-behavior: smooth; /* Native smooth scroll aktif kembali */
+            scroll-behavior: smooth;
         }
         .project-scroll::-webkit-scrollbar {
             display: none;
+        }
+
+        /* Class khusus untuk mematikan efek smooth saat JS melakukan "Jumping" Loop */
+        .project-scroll.no-smooth {
+            scroll-behavior: auto !important;
+            scroll-snap-type: none !important;
         }
     </style>
 </head>
@@ -71,7 +77,6 @@
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 w-full z-50 mix-blend-difference px-6 py-6 flex justify-between items-center">
         <a href="#" class="text-2xl font-bold tracking-tighter uppercase">Alif.TM</a>
-        <!-- Tombol Download CV dihapus dari sini -->
     </nav>
 
     <!-- HERO SECTION -->
@@ -274,365 +279,420 @@
             </div>
         </section>
 
-        <!-- PROJECTS SECTION (HORIZONTAL SCROLL) -->
-        <!-- data-lenis-prevent memastikan scroll di dalam area ini tidak diganggu oleh Lenis -->
-        <section class="py-24 border-b border-border overflow-hidden" data-lenis-prevent>
-             <div class="px-6 mb-12 flex justify-between items-end">
+        <!-- PROJECTS SECTION (TRUE INFINITE CAROUSEL) -->
+        <section class="py-24 border-b border-border overflow-hidden relative">
+            
+            <!-- Header Projects & Navigasi -->
+            <div class="px-6 mb-12 flex flex-col md:flex-row md:justify-between md:items-end gap-6 relative z-10">
                 <div>
                     <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tight">All Projects</h2>
                     <span class="text-xs text-gray-500 uppercase tracking-widest block mt-2">05 — Portfolio</span>
                 </div>
-                <div class="hidden md:block text-sm text-gray-500">
-                    Scroll Horizontal &rarr;
+                
+                <!-- Area Navigasi Carousel -->
+                <div class="flex items-center gap-4">
+                    <!-- Indikator mobile -->
+                    <div class="md:hidden text-sm text-gray-500 uppercase tracking-widest">
+                        Swipe &rarr;
+                    </div>
+
+                    <!-- Tombol Navigasi Desktop -->
+                    <div class="hidden md:flex gap-3">
+                        <button id="prevBtn" class="w-14 h-14 flex items-center justify-center rounded-full border border-border bg-transparent text-white hover:bg-white hover:text-black transition-all duration-300 ease-in-out cursor-pointer group/btn">
+                            <i data-lucide="arrow-left" class="w-6 h-6 group-hover/btn:-translate-x-1 transition-transform duration-300"></i>
+                        </button>
+                        <button id="nextBtn" class="w-14 h-14 flex items-center justify-center rounded-full border border-border bg-transparent text-white hover:bg-white hover:text-black transition-all duration-300 ease-in-out cursor-pointer group/btn">
+                            <i data-lucide="arrow-right" class="w-6 h-6 group-hover/btn:translate-x-1 transition-transform duration-300"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Scroll Container -->
-            <!-- wheel event listener dihapus, menggunakan scroll native -->
-            <div class="project-scroll flex overflow-x-auto space-x-6 px-6 pb-8 snap-x w-full outline-none" tabindex="0">
-                
-                <!-- Project 1: Peminjaman -->
-                <a href="https://github.com/akakpuny4/peminjaman-_tempat_Balaikota_Batu" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/IMG_5045.JPEG" alt="Peminjaman" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Peminjaman Tempat</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Balaikota Batu</p>
-                            <p class="text-base font-medium opacity-80">Sistem reservasi instansi pemerintah.</p>
+            <!-- Wrapper Interaktif Carousel -->
+            <div class="w-full relative">
+                <!-- Scroll Container menggunakan "gap-6" alih-alih px dan space-x agar perhitungannya murni tanpa tepi batas -->
+                <div id="projectCarousel" class="project-scroll flex overflow-x-auto gap-6 pb-12 snap-x snap-mandatory w-full outline-none items-center" tabindex="0">
+                    
+                    <!-- DAFTAR PROYEK ASLI -->
+                    <!-- Project 1: Peminjaman -->
+                    <a href="https://github.com/akakpuny4/peminjaman-_tempat_Balaikota_Batu" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/IMG_5045.JPEG" alt="Peminjaman" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=Peminjaman'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>GitHub</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Peminjaman Tempat</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Balaikota Batu</p>
+                                <p class="text-base font-medium opacity-80">Sistem reservasi instansi pemerintah.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>GitHub</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- Project 2: Repository -->
-                <a href="https://eprints.umm.ac.id/id/eprint/17258/" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/sus.png" alt="Repository" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Analisis Usability</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">UMM Repository</p>
-                            <p class="text-base font-medium opacity-80">Penelitian SUS & Think Aloud.</p>
+                    <!-- Project 2: Repository -->
+                    <a href="https://eprints.umm.ac.id/id/eprint/17258/" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/sus.png" alt="Repository" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=Repository'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>Journal</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Analisis Usability</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">UMM Repository</p>
+                                <p class="text-base font-medium opacity-80">Penelitian SUS & Think Aloud.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>Journal</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                 <!-- Project 3: Kesehatan Mental -->
-                 <a href="https://www.figma.com/design/eDYCV7WGx0QM2jIkaKPCfJ" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/calm.png" alt="Mental Health" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Aplikasi Kesehatan Mental</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">UX Design</p>
-                            <p class="text-base font-medium opacity-80">Pendekatan UX Journey Mapping.</p>
+                     <!-- Project 3: Kesehatan Mental -->
+                     <a href="https://www.figma.com/design/eDYCV7WGx0QM2jIkaKPCfJ" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/calm.png" alt="Mental Health" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=Mental+Health'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>Figma</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Aplikasi Kesehatan Mental</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">UX Design</p>
+                                <p class="text-base font-medium opacity-80">Pendekatan UX Journey Mapping.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>Figma</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- Project 4: Workout -->
-                <a href="https://www.figma.com/design/tic3DJveZcQmkQ6JMJsgCm" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/workout.png" alt="Workout" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Aplikasi Workout</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">UX Design</p>
-                            <p class="text-base font-medium opacity-80">Desain aplikasi kebugaran.</p>
+                    <!-- Project 4: Workout -->
+                    <a href="https://www.figma.com/design/tic3DJveZcQmkQ6JMJsgCm" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/workout.png" alt="Workout" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=Workout'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>Figma</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Aplikasi Workout</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">UX Design</p>
+                                <p class="text-base font-medium opacity-80">Desain aplikasi kebugaran.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>Figma</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- Project 5: Kencan -->
-                <a href="https://www.figma.com/design/WgRjvDSD9OXc5O1PFevTg0" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/datingapp.png" alt="Dating" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Aplikasi Kencan</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">UX Design</p>
-                            <p class="text-base font-medium opacity-80">Berbasis UX Journey.</p>
+                    <!-- Project 5: Kencan -->
+                    <a href="https://www.figma.com/design/WgRjvDSD9OXc5O1PFevTg0" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/datingapp.png" alt="Dating" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=Dating+App'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>Figma</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Aplikasi Kencan</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">UX Design</p>
+                                <p class="text-base font-medium opacity-80">Berbasis UX Journey.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>Figma</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                 <!-- Project 6: Dikichi -->
-                <a href="https://akakpuny4.github.io/Dikichi/" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/dikichi.png" alt="Dikichi" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Official Dikichi.id</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Web Design</p>
-                            <p class="text-base font-medium opacity-80">Linktree premium & interaktif.</p>
+                     <!-- Project 6: Dikichi -->
+                    <a href="https://akakpuny4.github.io/Dikichi/" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/dikichi.png" alt="Dikichi" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=Dikichi'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>Live Site</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Official Dikichi.id</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Web Design</p>
+                                <p class="text-base font-medium opacity-80">Linktree premium & interaktif.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>Live Site</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- Project 7: Wedding -->
-                <a href="https://akakpuny4.github.io/Undangan_pernikahan/" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/undangan.png" alt="Wedding" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Wedding Invitation</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Frontend</p>
-                            <p class="text-base font-medium opacity-80">Undangan digital interaktif.</p>
+                    <!-- Project 7: Wedding -->
+                    <a href="https://akakpuny4.github.io/Undangan_pernikahan/" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/undangan.png" alt="Wedding" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=Wedding'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>Live Site</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Wedding Invitation</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Frontend</p>
+                                <p class="text-base font-medium opacity-80">Undangan digital interaktif.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>Live Site</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- Project 8: Gemini 1 -->
-                <a href="https://github.com/akakpuny4/Gemini_1" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/gemini1.png" alt="Gemini 1" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Gemini Challenge 1</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Interactive</p>
-                            <p class="text-base font-medium opacity-80">Portofolio Google Challenge.</p>
+                    <!-- Project 8: Gemini 1 -->
+                    <a href="https://github.com/akakpuny4/Gemini_1" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/gemini1.png" alt="Gemini 1" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=Gemini+1'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>GitHub</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Gemini Challenge 1</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Interactive</p>
+                                <p class="text-base font-medium opacity-80">Portofolio Google Challenge.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>GitHub</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- Project 9: Gemini 2 -->
-                <a href="https://akakpuny4.github.io/Gemini_2/" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/gemini2.png" alt="Gemini 2" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Gemini Challenge 2</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Interactive</p>
-                            <p class="text-base font-medium opacity-80">Lanjutan Google Challenge.</p>
+                    <!-- Project 9: Gemini 2 -->
+                    <a href="https://akakpuny4.github.io/Gemini_2/" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/gemini2.png" alt="Gemini 2" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=Gemini+2'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>Live Site</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Gemini Challenge 2</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Interactive</p>
+                                <p class="text-base font-medium opacity-80">Lanjutan Google Challenge.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>Live Site</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- Project 10: Stock API -->
-                <a href="https://github.com/akakpuny4/Stock-api" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://placehold.co/600x400/171717/white?text=Stock+API" alt="API" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Stock Management API</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Laravel 11</p>
-                            <p class="text-base font-medium opacity-80">RESTful API inventaris.</p>
+                    <!-- Project 10: Gemini 3 -->
+                    <a href="#" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/gemini3.png" alt="Gemini 3" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=Gemini+3'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>GitHub</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Gemini Challenge 3</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Interactive</p>
+                                <p class="text-base font-medium opacity-80">Portofolio Google Challenge 3.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>Project Link</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                 <!-- Project 11: Karya Laili -->
-                 <a href="https://akakpuny4.github.io/Lailia_project/" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/Lailia.png" alt="Laili" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">PT. Karya Laili</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Company Profile</p>
-                            <p class="text-base font-medium opacity-80">Web profil & katalog produk.</p>
+                    <!-- Project 11: Stock API -->
+                    <a href="https://github.com/akakpuny4/Stock-api" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="https://placehold.co/600x400/171717/white?text=Stock+API" alt="API" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>Live Site</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Stock Management API</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Laravel 11</p>
+                                <p class="text-base font-medium opacity-80">RESTful API inventaris.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>GitHub</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                 <!-- Project 12: GeoTani -->
-                 <a href="https://akakpuny4.github.io/Geo_tani/" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/geotani.png" alt="GeoTani" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">GeoTani</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Dashboard</p>
-                            <p class="text-base font-medium opacity-80">Monitoring pertanian digital.</p>
+                     <!-- Project 12: Karya Laili -->
+                     <a href="https://akakpuny4.github.io/Lailia_project/" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/Lailia.png" alt="Laili" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=Lailia'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>Live Site</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">PT. Karya Laili</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Company Profile</p>
+                                <p class="text-base font-medium opacity-80">Web profil & katalog produk.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>Live Site</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- Project 13: Phishing -->
-                <a href="https://github.com/akakpuny4/My_education_project_not_phising" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/phising.png" alt="Phishing" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Edukasi Phishing</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Education</p>
-                            <p class="text-base font-medium opacity-80">Repository edukasi cyber.</p>
+                     <!-- Project 13: GeoTani -->
+                     <a href="https://akakpuny4.github.io/Geo_tani/" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/geotani.png" alt="GeoTani" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=GeoTani'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>GitHub</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">GeoTani</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Dashboard</p>
+                                <p class="text-base font-medium opacity-80">Monitoring pertanian digital.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>Live Site</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- Project 14: Ichigo -->
-                <a href="https://github.com/akakpuny4/Ichigo" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/ichigo.png" alt="Ichigo" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Ichigo 4fun</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Pure CSS</p>
-                            <p class="text-base font-medium opacity-80">Logo Kamen Rider HTML/CSS.</p>
+                    <!-- Project 14: Phishing -->
+                    <a href="https://github.com/akakpuny4/My_education_project_not_phising" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/phising.png" alt="Phishing" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=Phishing'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>GitHub</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Edukasi Phishing</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Education</p>
+                                <p class="text-base font-medium opacity-80">Repository edukasi cyber.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>GitHub</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- Project 15: Python CLI -->
-                <div class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="https://placehold.co/600x400/171717/white?text=Python+CLI" alt="CLI" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Perpustakaan CLI</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Python</p>
-                            <p class="text-base font-medium opacity-80">Aplikasi perpus berbasis command line.</p>
+                    <!-- Project 15: Ichigo -->
+                    <a href="https://github.com/akakpuny4/Ichigo" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/ichigo.png" alt="Ichigo" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=Ichigo'">
                         </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>CLI App</span>
-                            <i data-lucide="terminal" class="w-6 h-6"></i>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Ichigo 4fun</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Pure CSS</p>
+                                <p class="text-base font-medium opacity-80">Logo Kamen Rider HTML/CSS.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>GitHub</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
                         </div>
-                    </div>
+                    </a>
+
+                    <!-- Project 16: Python CLI -->
+                    <a href="#" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="https://placehold.co/600x400/171717/white?text=Python+CLI" alt="CLI" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105">
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Perpustakaan CLI</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Python</p>
+                                <p class="text-base font-medium opacity-80">Aplikasi perpus berbasis command line.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>CLI App</span>
+                                <i data-lucide="terminal" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 17: ZRO -->
+                    <a href="https://github.com/akakpuny4/my-profile-0" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/p1.png" alt="ZRO" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=ZRO'">
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Justme4fun ZRO</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Legacy</p>
+                                <p class="text-base font-medium opacity-80">Portofolio awal (Template 1).</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>GitHub</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 18: FRT -->
+                    <a href="https://github.com/akakpuny4/my-profile-2" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/p2.png" alt="FRT" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=FRT'">
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Justme4fun FRT</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Legacy</p>
+                                <p class="text-base font-medium opacity-80">Portofolio masa kuliah.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>GitHub</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 19: SCD -->
+                    <a href="https://github.com/akakpuny4/my-profile-3" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/p3.png" alt="SCD" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=SCD'">
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Justme4fun SCD</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Legacy</p>
+                                <p class="text-base font-medium opacity-80">Portofolio lama versi 2.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>GitHub</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 20: THRD -->
+                    <a href="https://github.com/akakpuny4/my-profile-4" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="exp/p4.png" alt="THRD" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" onerror="this.src='https://placehold.co/600x400/171717/white?text=THRD'">
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Justme4fun THRD</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Legacy</p>
+                                <p class="text-base font-medium opacity-80">Portofolio lama versi 3.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>GitHub</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Project 21: Sistem Manajemen Produk -->
+                    <a href="https://github.com/akakpuny4/system_product_manage_djanggo" target="_blank" class="project-card snap-center shrink-0 w-[85vw] md:w-[400px] h-[450px] group/card bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-all duration-500 ease-out">
+                        <div class="h-48 shrink-0 overflow-hidden">
+                            <img src="https://placehold.co/600x400/171717/white?text=Django+Backend" alt="Sistem Manajemen Produk" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105">
+                        </div>
+                        <div class="p-8 flex flex-col flex-grow justify-between">
+                            <div>
+                                <h3 class="text-2xl font-bold mb-2">Sistem Manajemen Produk</h3>
+                                <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Django Backend</p>
+                                <p class="text-base font-medium opacity-80">Sistem manajemen produk berbasis Django.</p>
+                            </div>
+                            <div class="mt-8 flex justify-between items-center opacity-50 group-hover/card:opacity-100">
+                                <span>GitHub</span>
+                                <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                    </a>
+
                 </div>
-
-                <!-- Project 16: ZRO -->
-                <a href="https://github.com/akakpuny4/my-profile-0" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/p1.png" alt="ZRO" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Justme4fun ZRO</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Legacy</p>
-                            <p class="text-base font-medium opacity-80">Portofolio awal (Template 1).</p>
-                        </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>GitHub</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Project 17: FRT -->
-                <a href="https://github.com/akakpuny4/my-profile-2" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/p2.png" alt="FRT" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Justme4fun FRT</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Legacy</p>
-                            <p class="text-base font-medium opacity-80">Portofolio masa kuliah.</p>
-                        </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>GitHub</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Project 18: SCD -->
-                <a href="https://github.com/akakpuny4/my-profile-3" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/p3.png" alt="SCD" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Justme4fun SCD</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Legacy</p>
-                            <p class="text-base font-medium opacity-80">Portofolio lama versi 2.</p>
-                        </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>GitHub</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
-                        </div>
-                    </div>
-                </a>
-
-                <!-- Project 19: THRD -->
-                <a href="https://github.com/akakpuny4/my-profile-4" target="_blank" class="snap-start shrink-0 w-[85vw] md:w-[400px] group bg-white/5 border border-border flex flex-col hover:bg-white hover:text-black transition-colors duration-300">
-                    <div class="h-48 overflow-hidden">
-                        <img src="exp/p4.png" alt="THRD" class="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity">
-                    </div>
-                    <div class="p-8 flex flex-col flex-grow justify-between">
-                        <div>
-                            <h3 class="text-2xl font-bold mb-2">Justme4fun THRD</h3>
-                            <p class="text-sm opacity-60 uppercase tracking-widest mb-4">Legacy</p>
-                            <p class="text-base font-medium opacity-80">Portofolio lama versi 3.</p>
-                        </div>
-                        <div class="mt-8 flex justify-between items-center opacity-50 group-hover:opacity-100">
-                            <span>GitHub</span>
-                            <i data-lucide="arrow-up-right" class="w-6 h-6"></i>
-                        </div>
-                    </div>
-                </a>
-
             </div>
         </section>
 
@@ -642,7 +702,6 @@
                 Get in Touch
             </h2>
 
-            <!-- BAGIAN BARU: Tombol Download CV dipindahkan ke sini -->
             <div class="mb-12 text-center md:text-left">
                  <a href="exp/Alif Tan Malaka-resume.pdf" onclick="alert('File CV belum diupload. Silakan ganti href pada kode HTML dengan link PDF CV Anda.')" class="inline-flex items-center gap-2 px-8 py-3 bg-white text-black rounded-full text-sm font-bold uppercase tracking-widest hover:bg-gray-200 transition-all duration-300">
                     <span>Download CV</span>
@@ -681,9 +740,105 @@
         }
         requestAnimationFrame(raf);
 
-        // MOUSE WHEEL CONTROL REMOVED
-        // The previous script to control horizontal scroll with wheel is deleted.
-        // Users can now scroll normally with shift+scroll or touch swipe.
+        // 2. TRUE INFINITE CAROUSEL LOGIC
+        document.addEventListener('DOMContentLoaded', () => {
+            const carousel = document.getElementById('projectCarousel');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (carousel && prevBtn && nextBtn) {
+                // Ambil semua card yang asli
+                const originalCards = Array.from(carousel.querySelectorAll('.project-card'));
+                const totalOriginal = originalCards.length;
+
+                // [STEP 1] CLONING: Kita gandakan semua card 2 kali (taruh di ujung kiri dan kanan)
+                // Ini membuat efek seolah-olah proyek terakhir ada di kiri proyek pertama
+                originalCards.forEach(card => {
+                    const clone = card.cloneNode(true);
+                    carousel.appendChild(clone); // Copy ke Kanan
+                });
+
+                originalCards.slice().reverse().forEach(card => {
+                    const clone = card.cloneNode(true);
+                    carousel.insertBefore(clone, carousel.firstChild); // Copy ke Kiri
+                });
+
+                // Perbarui daftar card untuk keperluan efek fokus
+                const allCards = carousel.querySelectorAll('.project-card');
+
+                // [STEP 2] EFEK FOKUS TENGAH (Meredupkan Card di Pinggir)
+                const observerOptions = {
+                    root: carousel,
+                    rootMargin: '0px',
+                    threshold: 0.6
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'scale(1)';
+                            entry.target.style.filter = 'brightness(1)';
+                        } else {
+                            entry.target.style.opacity = '0.5';
+                            entry.target.style.transform = 'scale(0.95)';
+                            entry.target.style.filter = 'brightness(0.6)';
+                        }
+                    });
+                }, observerOptions);
+
+                allCards.forEach(card => observer.observe(card));
+
+                // [STEP 3] MENGHITUNG JARAK SCROLL (Lebar Card + Lebar Gap/Jarak)
+                const getScrollAmount = () => {
+                    return originalCards[0].offsetWidth + 24; // 24 = jarak antar card (gap-6)
+                };
+
+                // [STEP 4] MENGATUR POSISI AWAL
+                // Lompat seketika ke blok "Asli" yang berada di tengah agar user bisa langsung scroll ke kiri
+                carousel.classList.add('no-smooth');
+                const singleSetWidth = getScrollAmount() * totalOriginal;
+                const centerOffset = (carousel.clientWidth - originalCards[0].offsetWidth) / 2;
+                carousel.scrollLeft = singleSetWidth - centerOffset;
+                carousel.offsetHeight; // Paksa browser untuk render segera tanpa delay
+                carousel.classList.remove('no-smooth');
+
+                // [STEP 5] LOGIKA MELOMPAT (WRAP-AROUND) SECARA TAK TERLIHAT DI LATAR BELAKANG
+                let isJumping = false;
+                carousel.addEventListener('scroll', () => {
+                    if(isJumping) return;
+                    const setWidth = getScrollAmount() * totalOriginal;
+                    
+                    // Jika user terus ke kiri dan masuk area tiruan kiri -> Lompat ke set asli
+                    if (carousel.scrollLeft < setWidth * 0.5) {
+                        isJumping = true;
+                        carousel.classList.add('no-smooth');
+                        carousel.scrollLeft += setWidth;
+                        carousel.offsetHeight;
+                        carousel.classList.remove('no-smooth');
+                        setTimeout(() => { isJumping = false; }, 50);
+                    } 
+                    // Jika user terus ke kanan dan masuk area tiruan kanan -> Lompat ke set asli
+                    else if (carousel.scrollLeft > setWidth * 1.5) {
+                        isJumping = true;
+                        carousel.classList.add('no-smooth');
+                        carousel.scrollLeft -= setWidth;
+                        carousel.offsetHeight;
+                        carousel.classList.remove('no-smooth');
+                        setTimeout(() => { isJumping = false; }, 50);
+                    }
+                });
+
+                // [STEP 6] TOMBOL NAVIGASI - Tanpa Delay!
+                prevBtn.addEventListener('click', () => {
+                    carousel.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+                });
+
+                nextBtn.addEventListener('click', () => {
+                    carousel.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+                });
+            }
+        });
     </script>
 </body>
 </html>
